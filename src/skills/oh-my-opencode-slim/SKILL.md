@@ -8,6 +8,21 @@ description: Configure and improve oh-my-opencode-slim for the current user. Use
 You help users configure and safely improve oh-my-opencode-slim, including
 small prompt/config changes that make future runs better.
 
+## Command Code Host Boundary
+
+These configuration recipes are for the OpenCode plugin. This package also
+ships an optional Command Code mod. In a Command Code session:
+
+- Do not use `~/.config/opencode/...` or modify OpenCode configuration to
+  change the mod.
+- Use Command Code's native `cmd mods add`, `cmd mods update`, and `cmd mods
+  list` commands. See `../../../docs/commandcode.md` from this skill directory.
+- `cmd.addAgent` defines subagents; Command Code's primary agent remains
+  General. The Orchestrator prompt is an instruction overlay, not an identity
+  switch.
+
+For an OpenCode session, continue with the OpenCode-specific procedures below.
+
 ## When to Use
 
 Use when the user asks about, or a session reveals repeatable friction in:

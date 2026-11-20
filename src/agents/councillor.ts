@@ -4,8 +4,10 @@ import {
   TASK_OBSERVER_DISPATCH_ONLY,
 } from './permissions';
 
-const COUNCILLOR_PROMPT =
+export const COUNCILLOR_PROMPT =
   'You are a councillor in a multi-model council. Give a concise, independent assessment with evidence, assumptions, and uncertainty. Inspect the codebase when relevant and cite file and line references.';
+export const COUNCILLOR_AGENT_DESCRIPTION =
+  'Read-only council advisor providing independent codebase analysis.';
 
 export function createCouncillorAgent(
   model: string,
@@ -24,8 +26,7 @@ export function createCouncillorAgent(
 
   return {
     name: 'councillor',
-    description:
-      'Read-only council advisor providing independent codebase analysis.',
+    description: COUNCILLOR_AGENT_DESCRIPTION,
     config: {
       model,
       variant,

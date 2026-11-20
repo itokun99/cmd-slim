@@ -26,6 +26,7 @@ const suspiciousImportPatterns = [/from\s+["']vscode-jsonrpc\/node["']/];
 const packagedRequiredFiles = [
   'package.json',
   'README.md',
+  'docs/commandcode.md',
   'LICENSE',
   'dist/index.js',
   'dist/plugin.d.ts',
@@ -33,6 +34,8 @@ const packagedRequiredFiles = [
   'dist/tui2.js',
   'dist/v2/tui.d.ts',
   'dist/cli/index.js',
+  'dist/commandcode/mod.js',
+  'src/commandcode/oh-my-opencode-slim.js',
   'dist/marketplace-contract/index.js',
   'dist/marketplace-contract/index.d.ts',
   'oh-my-opencode-slim.schema.json',
@@ -244,6 +247,25 @@ function verifyFreshInstall(tarballPath: string) {
     ].join('\n');
     console.log('Importing installed server subpath entrypoint...');
     run('node', ['--input-type=module', '--eval', serverSmokeScript], {
+      cwd: installDir,
+    });
+
+    const commandCodeSmokeScript = [
+      "import { readFileSync } from 'node:fs';",
+      "import path from 'node:path';",
+      "import { pathToFileURL } from 'node:url';",
+      "const packageRoot = path.resolve('node_modules/oh-my-opencode-slim');",
+      "const packageJson = JSON.parse(readFileSync(path.join(packageRoot, 'package.json'), 'utf8'));",
+      'const modEntry = packageJson?.commandcode?.mods?.[0];',
+      "if (modEntry !== './src/commandcode/oh-my-opencode-slim.js') throw new Error('Command Code package entry is missing');",
+      'const modUrl = pathToFileURL(path.resolve(packageRoot, modEntry));',
+      'const mod = await import(modUrl.href);',
+      "if (typeof mod.default !== 'function') throw new Error('Command Code package entry is not a ModApi factory');",
+      "console.log('Command Code mod package entry loads');",
+      'process.exit(0);',
+    ].join('\n');
+    console.log('Importing installed Command Code mod entrypoint...');
+    run('node', ['--input-type=module', '--eval', commandCodeSmokeScript], {
       cwd: installDir,
     });
 

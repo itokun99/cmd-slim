@@ -25,7 +25,10 @@ export function ensureCouncilPrompt(prompt: string): string {
     : `${prompt}\n\n${COUNCIL_COMPACTION_EXCEPTION}`;
 }
 
-const COUNCIL_AGENT_PROMPT = `${COUNCIL_REPORT}\n\n${COUNCIL_COMPACTION_EXCEPTION}`;
+export const COUNCIL_AGENT_DESCRIPTION =
+  'Multi-model consensus agent that synthesizes viewpoints from council members';
+
+export const COUNCIL_AGENT_PROMPT = `${COUNCIL_REPORT}\n\n${COUNCIL_COMPACTION_EXCEPTION}`;
 
 export function createCouncilAgent(
   model: string,
@@ -34,8 +37,7 @@ export function createCouncilAgent(
 ): AgentDefinition {
   return {
     name: 'council',
-    description:
-      'Multi-model consensus agent that synthesizes viewpoints from council members',
+    description: COUNCIL_AGENT_DESCRIPTION,
     config: {
       model,
       prompt: resolvePrompt(

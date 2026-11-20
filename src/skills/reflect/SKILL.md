@@ -14,6 +14,20 @@ The goal is to identify real repeated friction and suggest practical improvement
 
 Branch: lines marked [branch: --sessions] run only with that flag; plain /reflect skips Session Mode.
 
+## Command Code Host Boundary
+
+The Session Mode and database examples below target OpenCode. In a Command Code
+session:
+
+- Do not open OpenCode's `opencode.db` or use its session-table schema.
+- Use the current conversation, project instructions, and transcripts the user
+  provides as evidence.
+- If cross-session history is required but no supported export is available,
+  state that limitation and ask for an export; do not infer historical patterns.
+
+The rest of the reflection workflow can still inspect current project assets
+and repeated friction that is visible in the conversation.
+
 ## When to Use
 
 Use Reflect when the user asks to:

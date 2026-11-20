@@ -32,6 +32,14 @@ oh-my-opencode-slim is an agent orchestration plugin for OpenCode. It includes a
 
 The main idea is simple: instead of forcing one model to do everything, the plugin routes each part of the job to the agent best suited for it, balancing **quality, speed and cost**. The Orchestrator plans the work graph, dispatches specialists as background tasks, and reconciles their results before continuing.
 
+### Command Code Mod
+
+This package also ships an optional Command Code mod built from the current
+agent prompts and skills. Command Code's Mod API keeps General as the primary
+agent and uses the Orchestrator prompt as an overlay. See the
+[Command Code guide](docs/commandcode.md) for installation and its supported
+surface.
+
 ### ✨ Highlights
 
 - **[Deepwork](src/skills/deepwork/SKILL.md)** for heavy programming sessions.

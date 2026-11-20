@@ -1,7 +1,7 @@
 import {
   READONLY_FILE_OPERATIONS_RULES,
   WRITABLE_FILE_OPERATIONS_RULES,
-} from '../config';
+} from '../config/constants';
 
 const USER_REQUEST_RULE =
   "- A <user_request> block is the user's own words and outranks the caller's interpretation; follow it and flag any conflict";
